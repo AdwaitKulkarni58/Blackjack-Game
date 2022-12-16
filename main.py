@@ -1,11 +1,4 @@
-############### Blackjack Project #####################
-
-# Difficulty Normal 😎: Use all Hints below to complete the project.
-# Difficulty Hard 🤔: Use only Hints 1, 2, 3 to complete the project.
-# Difficulty Extra Hard 😭: Only use Hints 1 & 2 to complete the project.
-# Difficulty Expert 🤯: Only use Hint 1 to complete the project.
-
-############### Our Blackjack House Rules #####################
+############### Rules #####################
 
 # The deck is unlimited in size.
 # There are no jokers.
@@ -17,29 +10,13 @@
 # Cards are not removed from the deck as they are drawn.
 # The computer is the dealer.
 
-##################### Hints #####################
-
-# Hint 1: Go to this website and try out the Blackjack game:
-#   https://games.washingtonpost.com/games/blackjack/
-# Then try out the completed Blackjack project here:
-#   http://blackjack-final.appbrewery.repl.run
-
-# Hint 2: Read this breakdown of program requirements:
-#   http://listmoz.com/view/6h34DJpvJBFVRlZfJvxF
-# Then try to create your own flowchart for the program.
-
-# Hint 3: Download and read this flow chart I've created:
-#   https://drive.google.com/uc?export=download&id=1rDkiHCrhaf9eX7u7yjM1qwSuyEk-rPnt
-
 import random
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
-
 def deal_card():
     random_number = random.randrange(len(cards))
     return cards[random_number]
-
 
 user_cards = []
 computer_cards = []
@@ -72,6 +49,9 @@ while not is_game_over:
     sum_of_user_cards = calculate_score(user_cards)
     sum_of_computer_cards = calculate_score(computer_cards)
     
+    print(f"Your cards are: {user_cards}, your score is {sum_of_user_cards}")
+    print(f"The computer cards are: {computer_cards}, computer's score is {sum_of_computer_cards}")
+    
     if (sum_of_user_cards == 0 or sum_of_computer_cards == 0 or sum_of_user_cards > 21):
         is_game_over = True
     else:
@@ -81,8 +61,24 @@ while not is_game_over:
         else:
             is_game_over = True
 
-# Hint 12: Once the user is done, it's time to let the computer play. The computer should keep drawing cards as long as it has a score less than 17.
+while sum_of_computer_cards < 17:
+    computer_cards.append(deal_card())
+    sum_of_computer_cards = calculate_score(computer_cards)
 
-# Hint 13: Create a function called compare() and pass in the user_score and computer_score. If the computer and user both have the same score, then it's a draw. If the computer has a blackjack (0), then the user loses. If the user has a blackjack (0), then the user wins. If the user_score is over 21, then the user loses. If the computer_score is over 21, then the computer loses. If none of the above, then the player with the highest score wins.
+def compare(sum_of_user_cards, sum_of_computer_cards):
+    if sum_of_user_cards == sum_of_computer_cards:
+        return "It is a draw"
+    elif sum_of_computer_cards == 0:
+        return "You lose"
+    elif sum_of_user_cards == 0:
+        return "You win"
+    elif sum_of_user_cards > 21:
+        return "You lose"
+    elif sum_of_computer_cards > 21:
+        return "You win"
+    elif sum_of_user_cards > sum_of_computer_cards:
+        return "You win"
+    else:
+        return "You lose"        
 
 # Hint 14: Ask the user if they want to restart the game. If they answer yes, clear the console and start a new game of blackjack and show the logo from art.py.
