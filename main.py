@@ -31,13 +31,28 @@
 #Hint 3: Download and read this flow chart I've created: 
 #   https://drive.google.com/uc?export=download&id=1rDkiHCrhaf9eX7u7yjM1qwSuyEk-rPnt
 
-#Hint 4: Create a deal_card() function that uses the List below to *return* a random card.
-#11 is the Ace.
-#cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+import random
 
-#Hint 5: Deal the user and computer 2 cards each using deal_card() and append().
-#user_cards = []
-#computer_cards = []
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+def deal_card():
+    random_number = random.randrange(len(cards))
+    return cards[random_number]
+
+user_cards = []
+computer_cards = []
+
+first_user_card = deal_card()
+second_user_card = deal_card()
+
+first_computer_card = deal_card()
+second_computer_card = deal_card()
+
+user_cards.append(first_user_card)
+user_cards.append(second_user_card)
+
+user_cards.append(first_computer_card)
+user_cards.append(second_computer_card)
 
 #Hint 6: Create a function called calculate_score() that takes a List of cards as input 
 #and returns the score. 
